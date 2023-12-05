@@ -92,12 +92,19 @@ class Employee:
             return (self.hoursWorked * self.hourRate) + commission_amount
         else:
             return 0
-    def __str__(self): 
+        
+    def __str__(self):
         if self.contractType == "Monthly Contract":
-            return f"{self.name} works on a monthly salary of {self.salary}{self.commission_obj.commission()} Their total pay is {self.get_pay()}."
-        else: 
-            return f"{self.name} works on a contract of {self.hoursWorked} hour at {self.hourRate}/hour{self.commission_obj.commission()} Their total pay is {self.get_pay()}."        
+            contract_info = f"{self.name} works on a monthly salary of {self.salary}{self.commission_obj.commission()} Their total pay is {self.get_pay()}."
+        else:
+            if self.hoursWorked == 1:
+                hours = "hour"
+            else:
+                hours = "hours"
+            contract_info = f"{self.name} works on a contract of {self.hoursWorked} {hours} at {self.hourRate}/hour{self.commission_obj.commission()} Their total pay is {self.get_pay()}."
 
+        return contract_info
+        
 
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.
 billie = Employee("Billie", "Monthly Contract")
